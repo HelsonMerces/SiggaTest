@@ -13,33 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout do código
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup do Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
 
-      # 3️⃣ Instalar dependências
       - name: Cache Cypress binary
         uses: actions/cache@v4
         with:
-        path: ~/.cache/Cypress
-        key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Subir servidor do CRUD
       - name: Start application
         run: npx serve . &
-      
-      # 5️⃣ Esperar o servidor subir
+
       - name: Wait for app
         run: npx wait-on http://localhost:3000
 
-      # 6️⃣ Rodar Cypress (headless)
       - name: Run Cypress tests
         run: npm run cypress:run
