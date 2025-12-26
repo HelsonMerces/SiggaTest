@@ -21,9 +21,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18.17.0
 
       # 3️⃣ Instalar dependências
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+        path: ~/.cache/Cypress
+        key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         run: npm install
 
