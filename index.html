@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRUD Simples</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- LOGIN -->
+<section id="login-section">
+  <h2>Login</h2>
+
+  <input id="email" type="email" placeholder="Email" />
+  <input id="password" type="password" placeholder="Senha" />
+
+  <button id="login-btn">Entrar</button>
+
+  <p id="email-error" style="color: red; display: none;">
+    Email inválido. Use um email @test.com
+  </p>
+</section>
+
+  <!-- APP -->
+  <section id="app-section" style="display: none;">
+    <header>
+      <h2>Dashboard</h2>
+      <button id="logout-btn">Sair</button>
+    </header>
+
+    <hr />
+
+    <h3>Novo Registro</h3>
+    <input id="item-name" placeholder="Nome do item" />
+    <button id="add-item-btn">Criar</button>
+
+    <h3>Lista de Itens</h3>
+    <ul id="item-list"></ul>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
