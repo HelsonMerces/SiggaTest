@@ -7,6 +7,7 @@ const passwordInput = document.getElementById('password');
 
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
+const passwordError = document.getElementById('password-error');
 
 const itemNameInput = document.getElementById('item-name');
 const addItemBtn = document.getElementById('add-item-btn');
@@ -35,20 +36,28 @@ loginBtn.addEventListener('click', () => {
   // regex simples para validar @test.com
   const emailValido = /^[a-zA-Z0-9._%+-]+@test\.com$/.test(email);
 
+  // valida email
   if (!emailValido) {
     emailError.style.display = 'block';
     return;
+  } else {
+    emailError.style.display = 'none';
   }
 
-  // esconde erro se estiver tudo ok
-  emailError.style.display = 'none';
-
-  if (email && password) {
-    localStorage.setItem('logged', 'true');
-    showApp();
-    renderItems();
+  // valida senha (mínimo 3 caracteres)
+  if (password.length < 3) {
+    passwordError.style.display = 'block';
+    return;
+  } else {
+    passwordError.style.display = 'none';
   }
+
+  // login ok
+  localStorage.setItem('logged', 'true');
+  showApp();
+  renderItems();
 });
+
 // ---------- Logout ----------
 logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('logged');
@@ -56,6 +65,7 @@ logoutBtn.addEventListener('click', () => {
   emailInput.value = '';
   passwordInput.value = '';
   emailError.style.display = 'none';
+  passwordError.style.display = 'none';
 
   showLogin();
 });

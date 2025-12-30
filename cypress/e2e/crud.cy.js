@@ -111,4 +111,24 @@ it('Teste 3 - Não deve permitir login com email inválido', () => {
 
   // ✅ Garante que não entrou no sistema
   cy.contains('Dashboard').should('not.be.visible');
-})});
+})
+it('Teste 4 - Não deve permitir login com senha menor que 3 caracteres', () => {
+  cy.visit('/');
+
+  // 🔐 Email válido
+  cy.get('#email').type('qa@test.com');
+
+  // ❌ Senha inválida (menos de 3 caracteres)
+  cy.get('#password').type('12');
+
+  // 👉 Tenta logar
+  cy.get('#login-btn').click();
+
+  // ✅ Valida mensagem de erro da senha
+  cy.contains('A senha deve conter no mínimo 3 caracteres.')
+    .should('be.visible');
+
+  // ✅ Garante que não entrou no sistema
+  cy.contains('Dashboard').should('not.be.visible');
+});
+});
